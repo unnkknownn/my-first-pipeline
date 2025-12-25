@@ -1,0 +1,44 @@
+name: .NET CI Pipeline
+
+on:
+
+push:
+branches: [ "main" ]
+pull_request:
+branches: [ "main" ]
+
+jobs:
+
+jobs:
+build:
+name: I Сборка и тестирование
+runs-on: ubuntu-latest
+
+steps:
+# Шаг 1: Получаем код из репозитория
+- name:
+uses: actions/checkout@v4
+
+# Шаг 2: Устанавливаем .NET
+Устанавливаем .NET 8
+uses: actions/setup-dotnet@v3
+with:
+dotnet-version: '8.x'
+
+# Шаг 3: Восстанавливаем зависимости
+- name:
+run: dotnet restore
+
+# Шаг 4: Собираем проект
+- namе: Собираем проект
+run: dotnet build -- no-restore --
+configuration Release
+
+# War 5: 3anyckaeM тесты
+- name: / Запускаем тесты
+run: dotnet test -- no-build --
+verbosity normal
+
+Загружаем код
+
+- name:
