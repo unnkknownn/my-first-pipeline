@@ -19,8 +19,7 @@ steps:
 - name:
 uses: actions/checkout@v4
 
-# Шаг 2: Устанавливаем .NET
-Устанавливаем .NET 8
+# Шаг 2: Устанавливаем .NET8
 uses: actions/setup-dotnet@v3
 with:
 dotnet-version: '8.x'
