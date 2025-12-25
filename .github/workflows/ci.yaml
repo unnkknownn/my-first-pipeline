@@ -24,12 +24,14 @@ jobs:
 
       # Шаг 3: Восстанавливаем зависимости
       - name: Restore dependencies
-        run: dotnet restore
+        run: |
+        dotnet restore calculator/calculator.csproj
+        dotnet restore calculator.tests/calculator.tests.csproj
 
       # Шаг 4: Собираем проект
-      - name: Build project
-        run: dotnet build --no-restore --configuration Release
+      - name: Build
+        run: dotnet build calculator/calculator.csproj --no-restore --configuration Release
 
       # Шаг 5: Запускаем тесты
-      - name: Run tests
-        run: dotnet test --no-build --verbosity normal
+      - name: Test
+        run: dotnet test calculator.tests/calculator.tests.csproj --no-restore --verbosity normal
