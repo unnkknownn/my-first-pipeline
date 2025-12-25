@@ -1,4 +1,4 @@
-name: .NET CI Pipeline
+name: .NET CI
 
 on:
   push:
@@ -8,30 +8,24 @@ on:
 
 jobs:
   build:
-    name: Сборка и тестирование
     runs-on: ubuntu-latest
 
     steps:
-      # Шаг 1: Получаем код из репозитория
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      # Шаг 2: Устанавливаем .NET
-      - name: Setup .NET 8
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.x'
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0
 
-      # Шаг 3: Восстанавливаем зависимости
-      - name: Restore dependencies
-        run: |
-        dotnet restore calculator/calculator.csproj
-        dotnet restore calculator.tests/calculator.tests.csproj
+    - name: Restore dependencies
+      run: |
+        dotnet restore Calculator/Calculator.csproj
+        dotnet restore Calculator.Tests/Calculator.Tests.csproj
 
-      # Шаг 4: Собираем проект
-      - name: Build
-        run: dotnet build calculator/calculator.csproj --no-restore --configuration Release
+    - name: Build
+      run: dotnet build Calculator/Calculator.csproj --no-restore --configuration Release
 
-      # Шаг 5: Запускаем тесты
-      - name: Test
-        run: dotnet test calculator.tests/calculator.tests.csproj --no-restore --verbosity normal
+    - name: Test
+      run: dotnet test Calculator.Tests/Calculator.Tests.csproj --no-restore --verbosity normal
